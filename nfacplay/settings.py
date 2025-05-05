@@ -62,6 +62,12 @@ MIDDLEWARE = [
 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': None,
+    'DEFAULT_API_URL': 'https://web-production-6644e.up.railway.app',
+}
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 
