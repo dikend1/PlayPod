@@ -66,13 +66,37 @@ def get_albums(request):
         albums = []
 
         for album in albums_data:
-            albums.append({
-                'title': album['title'],
-                'artist': album['artist']['name'],
-                'cover_image':album['cover_medium'],
-                'tracks_count': album['nb_tracks']
-            })
+            album_id = album['id']
+            tracks_url = f"{DEEZER_API_URL}/album/{album_id}/tracks"
+            tracks_response = requests.get(tracks_url)
 
+            if tracks_response.status_code == 200:
+                tracks_data = tracks_response.json()
+                tracks = [{
+                    'title': track['title'],
+                    'artist': track['artist']['name'],
+                    'audio_url': track['preview'],
+                    'cover_image': album['cover_medium'],
+                    'album': album['title']
+                } for track in tracks_data['data']]
+
+                album_data = {
+                    'title': album['title'],
+                    'artist': album['artist']['name'],
+                    'cover_image': album['cover_medium'],
+                    'tracks_count': album['nb_tracks'],
+                    'tracks': tracks
+                }
+
+                albums.append(album_data)
+            else:
+                albums.append({
+                    'title': album['title'],
+                    'artist': album['artist']['name'],
+                    'cover_image': album['cover_medium'],
+                    'tracks_count': album['nb_tracks'],
+                    'tracks': []
+                })
         return Response(albums,status = status.HTTP_200_OK)
     else:
         return Response({
