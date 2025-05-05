@@ -9,7 +9,6 @@ from drf_yasg import openapi
 
 
 urlpatterns = [
-    path('swagger/', schema_view.as_view(), name='swagger-schema'),
     path('register/', views.register_user, name='register'),
     path('api/login/', views.login_user, name='login'),
     path('api/get_tracks/', views.get_tracks, name='deezer_tracks'),
