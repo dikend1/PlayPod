@@ -81,23 +81,31 @@ def get_albums(request):
 
 current_track = None
 is_playing = False
-track_list = ['track_id_1', 'track_id_2', 'track_id_3']
 
+tracks = []
 @api_view(['POST'])
 def next_track(request):
-    global current_track,is_playing
+    global current_track
 
     try:
-        current_index = track_list.index(current_track) if current_track else -1
-        next_index = (current_index + 1) % len(track_list)
-        next_track_id = track_list[next_index]
+        current_track_id = request.data.get('current_track_id')
 
-        current_track = next_track_id
-        is_playing = True
+        current_index = next((index for(index,track) in enumerate(tracks) if track['id'] == current_track_id),None)
 
-        return Response({'message': 'Track changed', 'new_track': {'id': next_track_id, 'title': 'Next Track Title'}}, status=status.HTTP_200_OK)
+        if current_index is None:
+            return Response({'error': 'Track not found'},status = status.HTTP_404_NOT_FOUND)
+
+        next_index = (current_index+1)%len(tracks)
+        next_track = tracks[next_index]
+
+        current_track = next_track['id']
+        return Response({
+            'message': 'Track changed',
+            'new_track': next_track
+        }, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': f'Error changing track: {str(e)}'},status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(['POST'])
 def play_track(request):
