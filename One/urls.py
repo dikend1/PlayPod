@@ -9,7 +9,7 @@ from drf_yasg import openapi
 
 
 urlpatterns = [
-    path('register/', views.register_user, name='register'),
+    path('api/register/', views.register_user, name='register'),
     path('api/login/', views.login_user, name='login'),
     path('api/get_tracks/', views.get_tracks, name='deezer_tracks'),
     path('api/get_albums/', views.get_albums, name='deezer_albums'),
