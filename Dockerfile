@@ -1,7 +1,6 @@
 # Используем официальный образ Python как базовый
 FROM python:3.10-slim
 
-
 # Устанавливаем рабочую директорию в контейнере
 WORKDIR /app
 
@@ -25,7 +24,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . /app/
 
 # Устанавливаем переменные окружения для Django
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=nfacplay.settings
 
 # Открываем порт 8000 для доступа
