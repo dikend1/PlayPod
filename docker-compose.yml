@@ -1,0 +1,18 @@
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: SONIT2CX
+      POSTGRES_DB: nfac
+
+  web:
+    build: .
+    command: gunicorn nfacplay.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
