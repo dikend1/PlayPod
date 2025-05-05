@@ -16,10 +16,10 @@ This project is a backend development of an inventory management system built wi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/dikend1/nFac.git
+   git clone https://github.com/dikend1/PlayPod.git
 2. Navigate to the project directory:
     ```bash
-   cd nFac
+   cd PlayPod
 3. Set up a virtual environment:
    ```bash
    python3 -m venv venv
