@@ -47,9 +47,6 @@ Limited time due to academic exams (linear algebra and calculus) and participati
 
 Lack of frontend development skills led to using GPT for generating a simple frontend (using HTML and CSS).
 
-## Video Demonstration
-Here is a video showing the functionality of the server-side part of the project.
-[https://youtu.be/8klR98nsiZQ]
 
 ```markdown
 ## Сообщение на русском
